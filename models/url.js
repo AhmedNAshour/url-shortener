@@ -1,16 +1,27 @@
-const mongoose = require('mongoose');
+import { nanoid } from 'nanoid';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
-  short: {
+  urlId: {
     type: String,
     required: true,
     unique: true,
   },
-  long: {
+  shortUrl: {
     type: String,
     required: true,
     unique: true,
+  },
+  origUrl: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  clicks: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   createdAt: {
     type: Date,
@@ -18,4 +29,5 @@ const urlSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Url', urlSchema);
+const Url = mongoose.model('Url', urlSchema);
+export default Url;
